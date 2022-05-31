@@ -4,7 +4,7 @@ const { Comments } = require("../models/models")
 class CommentsController {
     async get(req, res) {
         const comments = await Comments.findAll()
-        req.json(comments)
+        res.json(comments)
     }
 
     async create(req, res, next) {
