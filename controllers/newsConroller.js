@@ -24,12 +24,12 @@ class NewsController {
 
     async create(req, res, next) {
         try {
-            const {title, subtitle, body, date, tagId, userId} = req.body
+            const {title, subtitle, body, date} = req.body
             const {img} = req.files
             let fileName = uuid.v4() + ".jpg"
             img.mv(path.resolve(__dirname, '..', 'static', fileName))
         
-            const news = await News.create({title, subtitle, body, date, tagId, userId, img: fileName})
+            const news = await News.create({title, subtitle, body, date, img: fileName})
 
             return res.json(news)
         } catch(e) {
