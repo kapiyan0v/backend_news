@@ -3,14 +3,16 @@ const { Comments } = require("../models/models")
 
 class CommentsController {
     async get(req, res) {
-        const comments = await Comments.findAll()
+        const {id} = req.params
+        const comments = await Comments.findAll({where: article_id = id})
         res.json(comments)
     }
 
     async create(req, res, next) {
         try {
+            const {id} = req.params
             const {body} = req.body
-            const comments = await Comments.create({body})
+            const comments = await Comments.create({body, article_id: id})
 
             return res.json(comments)
         } catch(e) {

@@ -16,7 +16,8 @@ const News = sequelize.define('article', {
     subtitle: {type: DataTypes.STRING},
     body: {type: DataTypes.TEXT},
     date: {type: DataTypes.DATE},
-    img: {type: DataTypes.STRING}
+    img: {type: DataTypes.STRING},
+    author: {type: DataTypes.STRING}
 })
 
 const Likes = sequelize.define('like', {
