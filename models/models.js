@@ -42,7 +42,7 @@ Likes.belongsTo(News)
 Likes.hasOne(User)
 User.belongsTo(Likes)
 
-News.hasMany(Tags)
+News.hasOne(Tags)
 Tags.belongsTo(News)
 
 News.hasMany(Comments)
