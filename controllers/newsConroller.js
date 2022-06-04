@@ -95,13 +95,13 @@ class NewsController {
         res.json(world)
     }
 
-    async getStories(req, res) {
-        const stories = await News.findAll({
+    async getSports(req, res) {
+        const sports = await News.findAll({
             where: {
-                tag: "Истории"
+                tag: "спорт"
             }
         })
-        res.json(stories)
+        res.json(sports)
     }
     async getPodcasts(req, res) {
         const podcasts = await News.findAll({
