@@ -7,7 +7,7 @@ const User = sequelize.define('user', {
     name: {type: DataTypes.STRING},
     email: {type: DataTypes.STRING, unique: true},
     password: {type: DataTypes.STRING, unique: true},
-    role: {type: DataTypes.STRING, defaultValue: "USER"}
+    role: {type: DataTypes.STRING, defaultValue: "USER"},
 })
 
 const News = sequelize.define('article', {
@@ -17,44 +17,37 @@ const News = sequelize.define('article', {
     body: {type: DataTypes.TEXT},
     date: {type: DataTypes.DATE},
     img: {type: DataTypes.STRING},
+    tag: {type: DataTypes.STRING},
+    author: {type: DataTypes.STRING},
+    likes: {type: DataTypes.INTEGER}
 })
 
-const Likes = sequelize.define('like', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-})
-
-const Tags = sequelize.define('tag', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    name: {type: DataTypes.STRING}
-})
 
 const Comments = sequelize.define('comment', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     body: {type: DataTypes.STRING},
 })
 
-News.hasOne(User)
-User.belongsTo(News)
+News.associate = (models) => {
+    News.hasMany(models.Comments, {as: 'comment', foreignKey: 'articleId'})
+}
 
-News.hasMany(Likes)
-Likes.belongsTo(News)
+Comments.associate = (models) => {
+    Comments.belongsTo(models.News, {as: 'article', foreignKey: 'articleId'});
+}
 
-Likes.hasOne(User)
-User.belongsTo(Likes)
 
-News.hasOne(Tags)
-Tags.belongsTo(News)
+
+
 
 News.hasMany(Comments)
 Comments.belongsTo(News)
 
-Comments.hasOne(User)
-User.belongsTo(Comments)
+User.hasOne(Comments)
+Comments.belongsTo(User)
 
 module.exports = {
     User,
     News, 
-    Likes,
-    Tags,
-    Comments
+    Comments,
 }

@@ -1,18 +1,27 @@
 const ApiError = require("../error/ApiError")
-const { Comments } = require("../models/models")
+const { Comments, User } = require("../models/models")
 
 class CommentsController {
-    async get(req, res) {
-        const {id} = req.params
-        const comments = await Comments.findAll({where: article_id = id})
-        res.json(comments)
+    async get(req, res, next) {
+        try {
+            const comments = await Comments.findAll({
+                include: [
+                    {
+                        model: User,
+                        as: 'user'
+                    }
+                ]
+            })
+            return res.json(comments)
+        } catch(e) {
+            next(ApiError.badRequest(e.message))
+        }
     }
 
     async create(req, res, next) {
         try {
-            const {id} = req.params
-            const {body} = req.body
-            const comments = await Comments.create({body, article_id: id})
+            const {body, articleId, userId} = req.body
+            const comments = await Comments.create({body, articleId, userId})
 
             return res.json(comments)
         } catch(e) {
