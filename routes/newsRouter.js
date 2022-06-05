@@ -12,6 +12,6 @@ router.get('/:id', newsController.getOne)
 router.post('/search', newsController.Search)
 router.post('/create', newsController.create)
 router.delete('/:id', newsController.delete)
-router.patch('/:id', newsController.edit)
+router.put('/:id', newsController.edit)
 
 module.exports = router
