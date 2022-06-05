@@ -18,22 +18,11 @@ class NewsController {
     }
 
     async Search(req, res) {
-        const {tag, title, author} = req.body
-        if(tag == undefined) {
-            const news = await News.findAll({
-                where: {author}
-            })
-            res.json(news)
-        }
-        if(author == undefined) {
-            const news = await News.findAll({
-                where: {tag}
-            })
-            res.json(news)
-        }
-        if (author == undefined && tag == undefined) {
-            ApiError.badRequest(e.message)
-        }
+        const {tag} = req.body
+        const news = await News.findAll({
+            where: {tag}
+        })
+        res.json(news)
     }
 
 
