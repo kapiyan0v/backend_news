@@ -98,7 +98,7 @@ class NewsController {
     async getSports(req, res) {
         const sports = await News.findAll({
             where: {
-                tag: "спорт"
+                tag: "Спорт"
             }
         })
         res.json(sports)
