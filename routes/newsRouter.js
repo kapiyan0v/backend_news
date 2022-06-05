@@ -13,5 +13,6 @@ router.post('/search', newsController.Search)
 router.post('/create', newsController.create)
 router.delete('/:id', newsController.delete)
 router.put('/:id', newsController.edit)
+router.put('/likes/:id', newsController.getFake)
 
 module.exports = router

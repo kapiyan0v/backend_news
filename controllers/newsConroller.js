@@ -127,6 +127,17 @@ class NewsController {
         }
     }
 
+    async getFake(req, res, next) {
+        try {
+            const {id} = req.params
+            const {likes} = req.body
+            const news = await News.update({likes},{where: {id}})
+            return res.json(news)
+        } catch(e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+
 
     async delete(req, res) {
         const {id} = req.params
