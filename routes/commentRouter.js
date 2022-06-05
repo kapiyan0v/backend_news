@@ -4,7 +4,7 @@ const commentsRouter = require('../controllers/commentController')
 
 router.get('/', commentsRouter.get)
 router.post('/', commentsRouter.create)
-router.delete('/', commentsRouter.delete)
+router.delete('/:id', commentsRouter.delete)
 router.patch('/', commentsRouter.edit)
 
 module.exports = router
