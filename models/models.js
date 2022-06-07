@@ -19,7 +19,7 @@ const News = sequelize.define('article', {
     img: {type: DataTypes.STRING},
     tag: {type: DataTypes.STRING},
     author: {type: DataTypes.STRING},
-    likes: {type: DataTypes.INTEGER}
+    likes: {type: DataTypes.INTEGER, defaultValue: 0}
 })
 
 
