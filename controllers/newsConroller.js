@@ -101,7 +101,7 @@ class NewsController {
             let fileName = uuid.v4() + ".jpg"
             img.mv(path.resolve(__dirname, '..', 'static', fileName))
         
-            const news = await News.create({title, subtitle, body, date, img: fileName,author,tag,likes})
+            const news = await News.create({title, subtitle, body, date, img: fileName, author, tag, likes})
 
             return res.json(news)
         } catch(e) {
